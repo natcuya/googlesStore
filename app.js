@@ -1,11 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 const google = require('./google.js');
-
+const cors = require('cors');
 const app = express();
+
+const apps = require('./google.js')
+app.use(cors());
 app.use(morgan('common')); // let's see what 'common' format looks like
 
-app.get('/google', (req, res) => {
+app.get('/apps', (req, res) => {
     const {sort, genre} = req.query;
     let results = google;
 
@@ -35,6 +38,4 @@ app.get('/google', (req, res) => {
 });
 
 
-app.listen(8000, () => {
-  console.log('Server started http://localhost:8000');
-});
+module.exports = app
